@@ -5,24 +5,23 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>My Imageboard with MSG</h1>
+    <h1>My Imageboard</h1>
     <!-- container for Vue instance, has access to our Vue code -->
     <div id="main">
         <!-- name from data in script.js -->
-        <h2>Hi {{name}}! I can't wait to meet you :)</h2>
+        <!-- <h2>Hi {{name}}! I can't wait to meet you :)</h2>
         <h2>2 * 2 = {{ 2 * 2 }}</h2>
         <h2>Name capitalized: {{name.toUpperCase() }}</h2>
 
         <h3 v-if="seen">Yay you can see me!</h3>
-        <h3 v-else>"seen" is falsey if you see this!</h3>
+        <h3 v-else>"seen" is falsey if you see this!</h3> -->
 
         <!-- Looping in Vue -->
-        Cities:
-        
-            
-                {{ cities }}
-           
-        
+        Images:
+        <div v-for="each in images">
+        <img :src="each.url">
+        <label>{{ each.title }}</label>
+        </div>
     </div>
 
     <script src="/js/vue.js"></script>

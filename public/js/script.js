@@ -7,23 +7,23 @@
         data: {
             name: "msg",
             seen: true,
-            cities: [],
+            images: [],
         }, // data ends
         mounted: function () {
             // console.log("my vue has MOUNTED!");
 
             // console.log("this OUTSIDE axios", this);
             var self = this;
-            axios.get("/cities").then(function (response) {
+            axios.get("/images").then(function (response) {
                 // console.log("response from /cities", response.data);
                 // console.log("this INSIDE axios", self);
-                self.cities = response.data;
+                self.images = response.data;
             });
         }, // mounted ends
-        methods: {
-            myFunction: function () {
-                console.log("myFunction is running!");
-            },
-        },
+        // methods: {
+        //     myFunction: function () {
+        //         console.log("myFunction is running!");
+        //     },
+        // },
     });
 })();
