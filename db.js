@@ -6,14 +6,15 @@ const db = spicedPg(
 
 module.exports.selectImage = () => {
     return db.query(
-        `SELECT url, username, title, description FROM images ORDER BY created_at DESC;`
+        `SELECT url, username, title, description
+        FROM images ORDER BY created_at DESC;`
     );
 };
 
-module.exports.insertImage = (title, description, username, url) => {
+module.exports.insertEntry = (title, description, username, url) => {
     return db.query(
         `INSERT INTO images (title, description, username, url)
-        VALUES ($1, $2, $3, $4)
-        RETURNING id;`[(title, description, username, url)]
+        VALUES ($1, $2, $3, $4) RETURNING id;`,
+        [title, description, username, url]
     );
 };

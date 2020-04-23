@@ -33,12 +33,6 @@ const uploader = multer({
 });
 ////////////////////////////////////////////
 
-// let cities = [
-//     { name: "Berlin", country: "DE" },
-//     { name: "Sheffield", country: "UK" },
-//     { name: "London", country: "UK" },
-// ];
-
 app.get("/images", (req, res) => {
     // here /images relates to axios, not the url
     // because SPA single page application
@@ -66,19 +60,19 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     if (req.file) {
         // you'll want to eventually make a db insert here for all the info
         return db
-            .insertImage(
+            .insertEntry(
                 req.body.title,
                 req.body.description,
                 req.body.username,
                 req.body.url
             )
-            .catch((err) => {
-                console.log("Error in insertImage: ", err);
-            })
-            .then(() => {
+            .then((id) => {
                 console.log("***hello body", req.body);
-
+                console.log("***hello id", id);
                 res.json(req.body);
+            })
+            .catch((err) => {
+                console.log("Error in insertEntry: ", err);
             });
     } else {
         res.json({
