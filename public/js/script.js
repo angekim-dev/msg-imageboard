@@ -34,16 +34,17 @@
 
                 var formData = new FormData();
                 //use it because there is a file, normally would create an object
-                formData.append("title: ", this.title);
-                formData.append("description: ", this.description);
-                formData.append("username: ", this.username);
-                formData.append("file: ", this.file);
+                formData.append("title", this.title);
+                formData.append("description", this.description);
+                formData.append("username", this.username);
+                formData.append("file", this.file);
                 // if console.log formData, the result will be an empty object, but iz is still right
 
                 axios
                     .post("/upload", formData)
                     .then(function (resp) {
                         console.log("resp from POST /upload: ", resp);
+                        self.images.push(resp.data);
                     })
                     .catch(function (err) {
                         console.log("error in POST /upload: ", err);
