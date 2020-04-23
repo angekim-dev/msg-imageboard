@@ -13,6 +13,7 @@ body {
     margin: 20px;
     padding: 10px;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .image {

@@ -31,7 +31,7 @@
             handleClick: function (e) {
                 e.preventDefault();
                 console.log("data properties: ", this);
-
+                var self = this;
                 var formData = new FormData();
                 //use it because there is a file, normally would create an object
                 formData.append("title", this.title);
@@ -52,8 +52,8 @@
             },
 
             handleChange: function (e) {
-                console.log("handleChange is running");
-                console.log("file: ", e.target.files[0]);
+                // console.log("handleChange is running");
+                // console.log("file: ", e.target.files[0]);
                 this.file = e.target.files[0];
             },
         },
