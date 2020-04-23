@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>My Imageboard</h1>
+    <h1>I [] pixels</h1>
     <!-- container for Vue instance, has access to our Vue code -->
     <div id="main">
         <!-- name from data in script.js -->
@@ -17,10 +17,12 @@
         <h3 v-else>"seen" is falsey if you see this!</h3> -->
 
         <!-- Looping in Vue -->
-        Images:
-        <div v-for="each in images">
+        <h2>Latest Images</h2>
+        <div class="box">
+        <div v-for="each in images" class="image">
         <img :src="each.url">
         <label>{{ each.title }}</label>
+        </div>
         </div>
     </div>
 

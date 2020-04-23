@@ -16,7 +16,7 @@ app.get("/images", (req, res) => {
         .selectImage()
         .then((result) => {
             console.log("***result of insertImage", result);
-            res.json(result);
+            res.json(result.rows);
         })
         .catch((err) => {
             console.log("Error in insertImage: ", err);
