@@ -1,15 +1,56 @@
 // console.log("script linked!!");
 
 (function () {
+    Vue.component("first-component", {
+        template: "#template", // id of script tag in html
+        props: ["postTitle", "id"],
+        mounted: function () {
+            console.log("postTitle: ", this.postTitle);
+            console.log("id in mounted of my component", this.id);
+            // we can now make a request to server sending the id,
+            // and asking for all the information about that id
+        },
+        data: function () {
+            return {
+                name: "Pete",
+                count: 0,
+                // image {
+
+                // }
+            };
+        },
+        methods: {
+            closeModal: function () {
+                console.log("I am emitting from the component...(child)");
+                this.$emit("closemuffin");
+            },
+        },
+    });
+
     new Vue({
         // el - represents which element in our html will have access tp our Vue code
         el: "#main",
         data: {
+            selectedFruit: null, // anything truthy, also can be a number e.g. 10 or
             images: [],
             title: "",
             description: "",
             username: "",
             file: null,
+            fruits: [
+                {
+                    title: "🥝",
+                    id: 1,
+                },
+                {
+                    title: "🍓",
+                    id: 2,
+                },
+                {
+                    title: "🍋",
+                    id: 3,
+                },
+            ],
         }, // data ends
         mounted: function () {
             // console.log("my vue has MOUNTED!");
@@ -28,6 +69,9 @@
                 });
         }, // mounted ends
         methods: {
+            closeMe: function () {
+                console.log("I am the parent, I will now close the modal...");
+            },
             handleClick: function (e) {
                 e.preventDefault();
                 console.log("data properties: ", this);
@@ -43,7 +87,8 @@
                 axios
                     .post("/upload", formData)
                     .then(function (resp) {
-                        console.log("resp from POST /upload: ", resp);
+                        console.log("resp from POST /upload: ", resp.data);
+                        console.log("***", self.images);
                         self.images.push(resp.data);
                     })
                     .catch(function (err) {

@@ -35,3 +35,15 @@ img {
     object-fit: cover;
     overflow: hidden;
 }
+.fruit {
+    font-size: 200px;
+}
+.component {
+    background-color: hotpink;
+    opacity: 50%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

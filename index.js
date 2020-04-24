@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const db = require("./db");
 const s3 = require("./s3");
-const config = require("./config.json");
+const config = require("./config");
 
 app.use(express.static("public"));
 

@@ -20,13 +20,20 @@
             <!-- just convention to call it handleClick -->
         </form>
 
-        <!-- name from data in script.js -->
-        <!-- <h2>Hi {{name}}! I can't wait to meet you :)</h2>
-        <h2>2 * 2 = {{ 2 * 2 }}</h2>
-        <h2>Name capitalized: {{name.toUpperCase() }}</h2>
-
-        <h3 v-if="seen">Yay you can see me!</h3>
-        <h3 v-else>"seen" is falsey if you see this!</h3> -->
+        <first-component 
+            v-if="selectedFruit" 
+            post-title="hello" 
+            :id="selectedFruit"
+            @closemuffin="closeMe"
+        ></first-component>
+        <!-- <first-component></first-component> -->
+        
+        <p 
+            class="fruit" 
+            @click="selectedFruit = fruit.id" 
+            v-for="fruit in fruits" 
+            v-if="fruits.length">{{fruit.title}}{{fruit.id}}</p>
+        
 
         <!-- Looping in Vue -->
         <h2>Latest Images</h2>
@@ -36,7 +43,20 @@
         <label>{{ each.title }}</label>
         </div>
         </div>
+
+        <!-- <first-component></first-component> -->
     </div>
+
+    <!-- we can only return one element from our tag, so ONLY ONE DIV!!!  -->
+    <script type="text/x-template" id="template">
+        <div class="component">
+            <h4 @click="closeModal">X</h4>
+            <h1>This is my first template</h1>
+            <h2>Hello {{name}}.</h2>
+            <button @click="count++">DONT'T CLICK</button>
+            <h3>Count: {{count}}</h3>
+        </div>
+    </script>
 
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
