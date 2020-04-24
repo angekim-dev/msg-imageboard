@@ -89,7 +89,7 @@
                     .then(function (resp) {
                         console.log("resp from POST /upload: ", resp.data);
                         console.log("***", self.images);
-                        self.images.push(resp.data);
+                        self.images.unshift(resp.data);
                     })
                     .catch(function (err) {
                         console.log("error in POST /upload: ", err);

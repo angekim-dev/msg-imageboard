@@ -68,12 +68,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             .then((result) => {
                 // console.log("***hello body", req.body);
                 console.log("***hello result", result);
-                res.json(
-                    req.body.title,
-                    req.body.description,
-                    req.body.username,
-                    req.body.url
-                );
+                res.json(result.rows[0]); //needs to be an object
             })
             .catch((err) => {
                 console.log("Error in insertEntry: ", err);
