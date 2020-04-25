@@ -13,12 +13,13 @@
             // we can now make a request to server sending the id,
             // and asking for all the information about that id
             var self = this;
+
             axios
-                .post("/one-image")
+                .post("/one-image", { id: this.id })
                 .then(function (response) {
                     console.log("response from /image", response.data);
                     console.log("this INSIDE axios in component", self);
-                    // self.images = response.data;
+                    self.image = response.data.shift();
                 })
                 .catch(function (err) {
                     console.log("error in POST /one-image: ", err);

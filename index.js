@@ -82,10 +82,15 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 });
 
 app.post("/one-image", (req, res) => {
+    var reqId = req.body.id;
     return db
-        .getImage(req.body.id)
+        .getImage(reqId)
         .then((result) => {
-            console.log("**** result of getImage in index.js", result);
+            console.log(
+                "**** result.rows of getImage in index.js",
+                result.rows
+            );
+            // result.rows is []
         })
         .catch((err) => {
             console.log("Error in getImage: ", err);
