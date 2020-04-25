@@ -36,7 +36,7 @@ img {
     overflow: hidden;
 }
 .fruit {
-    font-size: 200px;
+    background-color: khaki;
 }
 .component {
     background-color: hotpink;

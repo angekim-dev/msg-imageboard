@@ -21,32 +21,40 @@
         </form>
 
         <first-component 
-            v-if="selectedFruit" 
+            v-if="selectedImages" 
             post-title="hello" 
-            :id="selectedFruit"
-            @closemuffin="closeMe"
-        ></first-component>
+            :id="selectedImages"
+            @closemuffin="closeMe">
+        </first-component>
         <!-- <first-component></first-component> -->
         
         <p 
-            class="fruit" 
-            @click="selectedFruit = fruit.id" 
-            v-for="fruit in fruits" 
-            v-if="fruits.length">{{fruit.title}}{{fruit.id}}</p>
+            class="image" 
+            @click="selectedImages = image.id" 
+            v-for="image in images" 
+            v-if="images.length">
+            <img :src="image.url" />
+            {{image.title}}
+        </p>
         
 
         <!-- Looping in Vue -->
         <h2>Latest Images</h2>
         <div class="box">
-        <div v-for="each in images" class="image">
-        <img :src="each.url">
-        <label>{{ each.title }}</label>
-        </div>
+            <div 
+                @click="selectedImages = image.id"
+                v-for="each in images" 
+                class="image">
+                <!-- here :src is same as v-bind:src -->
+                <img v-if="images.length"
+                :src="each.url">
+                <label>{{ each.title }}</label>
+            </div>
         </div>
 
         <!-- <first-component></first-component> -->
     </div>
-
+<!-- END OF MAIN -->
     <!-- we can only return one element from our tag, so ONLY ONE DIV!!!  -->
     <script type="text/x-template" id="template">
         <div class="component">

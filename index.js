@@ -7,6 +7,7 @@ const s3 = require("./s3");
 const config = require("./config");
 
 app.use(express.static("public"));
+app.use(express.json());
 
 ////////////// IMAGE UPLOAD BOILERPLATE ///////////////
 const multer = require("multer");
@@ -67,7 +68,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             )
             .then((result) => {
                 // console.log("***hello body", req.body);
-                console.log("***hello result", result);
+                // console.log("***hello result", result);
                 res.json(result.rows[0]); //needs to be an object
             })
             .catch((err) => {
@@ -78,6 +79,17 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             success: false,
         });
     }
+});
+
+app.post("/one-image", (req, res) => {
+    return db
+        .getImage(req.body.id)
+        .then((result) => {
+            console.log("**** result of getImage in index.js", result);
+        })
+        .catch((err) => {
+            console.log("Error in getImage: ", err);
+        });
 });
 
 app.listen(8080, () => console.log("IB server is listening..."));

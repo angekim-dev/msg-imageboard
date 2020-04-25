@@ -5,18 +5,34 @@
         template: "#template", // id of script tag in html
         props: ["postTitle", "id"],
         mounted: function () {
+            // hello from first-component in index.html
             console.log("postTitle: ", this.postTitle);
+            //id of image
             console.log("id in mounted of my component", this.id);
+            // AXIOS
             // we can now make a request to server sending the id,
             // and asking for all the information about that id
+            var self = this;
+            axios
+                .post("/one-image")
+                .then(function (response) {
+                    console.log("response from /image", response.data);
+                    console.log("this INSIDE axios in component", self);
+                    // self.images = response.data;
+                })
+                .catch(function (err) {
+                    console.log("error in POST /one-image: ", err);
+                });
         },
         data: function () {
             return {
-                name: "Pete",
-                count: 0,
-                // image {
-
-                // }
+                // name: "Pete",
+                // count: 0,
+                image: {
+                    url: "",
+                    title: "",
+                    description: "",
+                },
             };
         },
         methods: {
@@ -31,26 +47,26 @@
         // el - represents which element in our html will have access tp our Vue code
         el: "#main",
         data: {
-            selectedFruit: null, // anything truthy, also can be a number e.g. 10 or
+            selectedImages: null, // anything truthy, also can be a number e.g. 10 or
             images: [],
             title: "",
             description: "",
             username: "",
             file: null,
-            fruits: [
-                {
-                    title: "🥝",
-                    id: 1,
-                },
-                {
-                    title: "🍓",
-                    id: 2,
-                },
-                {
-                    title: "🍋",
-                    id: 3,
-                },
-            ],
+            // fruits: [
+            //     {
+            //         title: "🥝",
+            //         id: 1,
+            //     },
+            //     {
+            //         title: "🍓",
+            //         id: 2,
+            //     },
+            //     {
+            //         title: "🍋",
+            //         id: 3,
+            //     },
+            // ],
         }, // data ends
         mounted: function () {
             // console.log("my vue has MOUNTED!");
@@ -71,7 +87,9 @@
         methods: {
             closeMe: function () {
                 console.log("I am the parent, I will now close the modal...");
+                this.selectedImages = null;
             },
+
             handleClick: function (e) {
                 e.preventDefault();
                 console.log("data properties: ", this);
@@ -82,13 +100,13 @@
                 formData.append("description", this.description);
                 formData.append("username", this.username);
                 formData.append("file", this.file);
-                // if console.log formData, the result will be an empty object, but iz is still right
+                // if console.log formData, the result will be an empty object, but it is still right
 
                 axios
                     .post("/upload", formData)
                     .then(function (resp) {
-                        console.log("resp from POST /upload: ", resp.data);
-                        console.log("***", self.images);
+                        // console.log("resp from POST /upload: ", resp.data);
+                        // console.log("***", self.images);
                         self.images.unshift(resp.data);
                     })
                     .catch(function (err) {
@@ -102,5 +120,7 @@
                 this.file = e.target.files[0];
             },
         },
+        // END OF METHODS
     });
+    // END OF VUE
 })();
