@@ -94,12 +94,24 @@ app.post("/one-image", (req, res) => {
         })
         .then(() => {
             return db.getComment(req.body.id).then((results) => {
-                console.log("results.rows in getComment", results.rows);
+                console.log("results in getComment", results);
                 // results.rows is an empty array
             });
         })
         .catch((err) => {
             console.log("Error in POST /one-image: ", err);
+        });
+});
+
+app.post("/comment", (req, res) => {
+    return db
+        .insertComment(req.body.username, req.body.comment, req.body.image_id)
+        .then((result) => {
+            console.log("result in POST comment", result);
+            res.json(result.rows);
+        })
+        .catch((err) => {
+            console.log("Error in POST /comment: ", err);
         });
 });
 

@@ -29,3 +29,11 @@ module.exports.getComment = (id) => {
         [id]
     );
 };
+
+module.exports.insertComment = (username, comment, image_id) => {
+    return db.query(
+        `INSERT INTO comments (username, comment, image_id)
+        VALUES ($1, $2, $3) RETURNING *;`,
+        [username, comment, image_id]
+    );
+};

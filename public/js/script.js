@@ -20,7 +20,7 @@
                     console.log("response from /image", response.data);
                     console.log("this INSIDE axios in component", self);
                     self.image = response.data.shift();
-                    console.log(self.comments);
+                    self.comments = response.data;
                 })
                 .catch(function (err) {
                     console.log("error in POST /one-image: ", err);
@@ -28,15 +28,17 @@
         },
         data: function () {
             return {
-                // name: "Pete",
-                // count: 0,
                 image: {
                     url: "",
                     title: "",
                     description: "",
+                    username: "",
+                    comment: "",
                 },
                 comments: [],
+                username: "",
                 comment: "",
+                created_at: "",
             };
         },
         methods: {
@@ -47,6 +49,17 @@
             displayComment: function (e) {
                 e.preventDefault();
                 console.log("***speak your truth!!");
+                var self = this;
+                var realComment = {
+                    username: this.username,
+                    comment: this.comment,
+                    image_id: this.id,
+                };
+                console.log("****am I the comment?", realComment);
+                axios.post("/comment", realComment).then(function (response) {
+                    console.log("response data POST /comment: ", response.data);
+                    self.comments.unshift(response.data[0]);
+                });
             },
         },
     });
