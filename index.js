@@ -90,7 +90,7 @@ app.post("/one-image", (req, res) => {
                 "**** result.rows of getImage in index.js",
                 result.rows
             );
-            // result.rows is []
+            res.json(result.rows);
         })
         .catch((err) => {
             console.log("Error in getImage: ", err);
