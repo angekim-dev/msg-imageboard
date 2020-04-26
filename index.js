@@ -92,8 +92,14 @@ app.post("/one-image", (req, res) => {
             );
             res.json(result.rows);
         })
+        .then(() => {
+            return db.getComment(req.body.id).then((results) => {
+                console.log("results.rows in getComment", results.rows);
+                // results.rows is an empty array
+            });
+        })
         .catch((err) => {
-            console.log("Error in getImage: ", err);
+            console.log("Error in POST /one-image: ", err);
         });
 });
 

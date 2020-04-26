@@ -53,10 +53,15 @@
             <p>{{image.title}}</p>
             <p>{{image.description}}</p>
             <p>{{image.username}}</p>
-            <!-- <h2>Hello {{name}}.</h2> -->
-            <!-- <button @click="count++">DONT'T CLICK</button> -->
-            <!-- <h3>Count: {{count}}</h3> -->
-        </div>
+            <p>{{image.created_at}}</p>
+
+            <input v-model="comment" type="text" name="comment" placeholder="Your comment">
+            <button @click="displayComment">COMMENT</button>
+            <div
+            class="comments"
+            v-for="comment in comments"
+            v-if="comments.length">{{comment.comment}} and {{comment.created_at}}</div>
+            </div>
     </script>
 
     <script src="/js/vue.js"></script>

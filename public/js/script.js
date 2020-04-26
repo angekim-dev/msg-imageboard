@@ -20,6 +20,7 @@
                     console.log("response from /image", response.data);
                     console.log("this INSIDE axios in component", self);
                     self.image = response.data.shift();
+                    console.log(self.comments);
                 })
                 .catch(function (err) {
                     console.log("error in POST /one-image: ", err);
@@ -34,12 +35,18 @@
                     title: "",
                     description: "",
                 },
+                comments: [],
+                comment: "",
             };
         },
         methods: {
             closeModal: function () {
                 console.log("I am emitting from the component...(child)");
                 this.$emit("closemuffin");
+            },
+            displayComment: function (e) {
+                e.preventDefault();
+                console.log("***speak your truth!!");
             },
         },
     });
