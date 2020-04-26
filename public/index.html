@@ -28,27 +28,16 @@
         </first-component>
         <!-- <first-component></first-component> -->
         
-        <p 
-            class="image" 
-            @click="selectedImages = image.id" 
-            v-for="image in images" 
-            v-if="images.length">
-            <img :src="image.url" />
-            {{image.title}}
-        </p>
-        
-
         <!-- Looping in Vue -->
         <h2>Latest Images</h2>
         <div class="box">
             <div 
                 @click="selectedImages = image.id"
-                v-for="each in images" 
-                class="image">
-                <!-- here :src is same as v-bind:src -->
-                <img v-if="images.length"
-                :src="each.url">
-                <label>{{ each.title }}</label>
+                v-for="image in images" 
+                class="image"
+                v-if="images.length">
+                <img :src="image.url">
+                <label>{{image.title }}</label>
             </div>
         </div>
 
