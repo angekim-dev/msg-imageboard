@@ -20,7 +20,7 @@ module.exports.insertEntry = (title, description, username, url) => {
     );
 };
 
-exports.getMoreImages = (lastId) => {
+exports.getMoreImages = (id) => {
     return db.query(
         `SELECT *, (
         SELECT id FROM images
@@ -30,7 +30,7 @@ exports.getMoreImages = (lastId) => {
         WHERE id < $1
         ORDER by id DESC
         LIMIT 6;`,
-        [lastId]
+        [id]
     );
 };
 

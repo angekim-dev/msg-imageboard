@@ -149,15 +149,21 @@
                 var visibleId = this.images.length - 1;
                 console.log("***", this.images[visibleId]);
                 var bottomItem = this.images[visibleId];
-                var bottomItemId = bottomItem.id;
-                console.log("**bottomItemId**", bottomItemId);
+                var bottomItemObject = { id: bottomItem.id };
+                console.log("**bottomItemObject**", bottomItemObject);
                 var self = this;
                 axios
-                    .post("/more", bottomItemId)
+                    .post("/more", bottomItemObject)
                     .then(function (result) {
-                        console.log("**result of AXIOS", result);
+                        // console.log("**result of AXIOS", result);
 
-                        self.images.push(result);
+                        if (bottomItemObject.id == 1) {
+                            console.log("**id**", bottomItemObject.id);
+                            this.document.getElementById(
+                                "more"
+                            ).style.visibility = "hidden";
+                        }
+                        self.images.push(...result.data);
                     })
                     .catch(function (err) {
                         console.log("error in POST /more: ", err);
