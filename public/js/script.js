@@ -15,8 +15,9 @@
                 .then(function (response) {
                     console.log("response from /image", response.data);
                     console.log("this INSIDE axios in component", self);
-                    self.image = response.data.shift();
-                    self.comments = response.data;
+                    self.item = response.data.shift();
+                    self.comments = response.data[0];
+                    console.log("***", self.comments);
                 })
                 .catch(function (err) {
                     console.log("error in POST /one-image: ", err);
@@ -24,7 +25,7 @@
         },
         data: function () {
             return {
-                image: {
+                item: {
                     url: "",
                     title: "",
                     description: "",
@@ -37,6 +38,15 @@
                 created_at: "",
             };
         },
+        // watch: {
+        //     id: function () {
+        //         //whenever our image id changes, this function will run
+        //         // same thing a mounted function on component
+        //         // axious, so it runs not only once but every single time
+        //         // so retrieve NEW image info and comments as well
+        //         console.log("WATCHER image ID changed");
+        //     },
+        // },
         methods: {
             closeModal: function () {
                 console.log("I am emitting from the component...(child)");
@@ -51,10 +61,14 @@
                     comment: this.comment,
                     image_id: this.id,
                 };
-                console.log("****am I the comment?", realComment);
+                // console.log("****am I the comment?", realComment);
                 axios.post("/comment", realComment).then(function (response) {
-                    console.log("response data POST /comment: ", response.data);
-                    self.comments.unshift(response.data[0]);
+                    console.log(
+                        "response data [0] POST /comment: ",
+                        response.data[0]
+                    );
+                    console.log("all the comments", self.comments);
+                    self.comments.push(response.data[0]);
                 });
             },
         },
@@ -65,6 +79,9 @@
         data: {
             selectedImages: null, // anything truthy, also can be a number e.g. 10 or
             images: [],
+            // // this line of code makes modal pop  open automatically when page intially loads
+            // // this gives us a link sharing functionality
+            // id: location.hash.slice(1),
             title: "",
             description: "",
             username: "",
@@ -99,6 +116,12 @@
                 .catch(function (err) {
                     console.log("error in GET /images: ", err);
                 });
+            // window.addEventListener("hashchange", function () {
+            //     console.log("hash change has fired");
+            //     console.log(location.hash);
+
+            //     self.id = location.hash.slice(1);
+            // });
         }, // mounted ends
         methods: {
             closeMe: function () {

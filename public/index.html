@@ -28,16 +28,20 @@
         <!-- Looping in Vue -->
         <h2>Latest Images</h2>
         <div class="box">
+             <!-- 1. removed @click="selectedImages = image.id"-->
+            <!-- 2. wrap image in anchor tag with a specific href value -->
             <div 
-                @click="selectedImages = image.id"
-                v-for="image in images" 
+                @click="selectedImages = item.id"
+                v-for="item in images" 
                 class="image"
                 v-if="images.length">
-                <img :src="image.url">
-                <label>{{image.title }}</label>
+                <!-- <a :href="'#' + image.id"> -->
+                <img :src="item.url">
+                <label>{{item.title }}</label>
+                <!-- </a> -->
             </div>
         </div>
-        <button v-if="moreImg" @click="showMore">MORE</button>
+        <button id="more" v-if="moreImg" @click="showMore">MORE</button>
         <!-- <first-component></first-component> -->
     </div>
 <!-- END OF MAIN -->
@@ -45,10 +49,10 @@
     <script type="text/x-template" id="template">
         <div class="component">
             <h4 @click="closeModal">X</h4>
-            <img :src="image.url" />
-            <p>{{image.title}}</p>
-            <p>{{image.description}}</p>
-              <p>Uploaded by {{image.username}} on {{image.created_at}}</p>
+            <img :src="item.url" />
+            <p>{{item.title}}</p>
+            <p>{{item.description}}</p>
+              <p>Uploaded by {{item.username}} on {{item.created_at}}</p>
             <h5>Add a Comment!</h5>
             <input v-model="comment" type="text" name="comment" placeholder="Your comment">
             <input v-model="username" type="text" name="username" placeholder="Your username">

@@ -84,6 +84,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     }
 });
 app.post("/one-image", (req, res) => {
+    var initialJson = [];
     var reqId = req.body.id;
     return db
         .getImage(reqId)
@@ -92,12 +93,14 @@ app.post("/one-image", (req, res) => {
                 "**** result.rows of getImage in index.js",
                 result.rows
             );
-            res.json(result.rows);
+            initialJson.push(result.rows[0]);
         })
         .then(() => {
             return db.getComment(req.body.id).then((results) => {
-                console.log("results in getComment", results);
+                console.log("****results.rows in getComment", results.rows);
+                initialJson.push(results.rows);
                 // results.rows is an empty array
+                res.json(initialJson);
             });
         })
         .catch((err) => {
