@@ -4,33 +4,33 @@ const db = spicedPg(
         "postgres:postgres:postgres@localhost:5432/imageboard"
 );
 
-module.exports.selectImage = () => {
+module.exports.getInfos = () => {
     return db.query(
-        `SELECT url, username, title, description
-        FROM images ORDER BY id DESC;`
+        `SELECT *
+        FROM images ORDER BY id DESC
+        LIMIT 6;`
     );
 };
-
-module.exports.getMoreImages = (lastId) =>
-    db.query(
-        `SELECT  *, (
-            SELECT id FROM images
-            ORDER BY
-            id ASC
-            LIMIT 1
-    ) AS lowest_id FROM images
-            WHERE id < $1
-            ORDER BY id DESC
-            LIMIT 2;`,
-        [lastId]
-    );
-// .then(({ rows }) => rows);
 
 module.exports.insertEntry = (title, description, username, url) => {
     return db.query(
         `INSERT INTO images (title, description, username, url)
         VALUES ($1, $2, $3, $4) RETURNING *;`,
         [title, description, username, url]
+    );
+};
+
+exports.getMoreImages = (lastId) => {
+    return db.query(
+        `SELECT *, (
+        SELECT id FROM images
+        ORDER BY id ASC
+        LIMIT 1
+        ) AS lowest_id FROM images
+        WHERE id < $1
+        ORDER by id DESC
+        LIMIT 6;`,
+        [lastId]
     );
 };
 
@@ -42,7 +42,6 @@ module.exports.getImage = (id) => {
         [id]
     );
 };
-
 module.exports.getComment = (id) => {
     return db.query(
         `SELECT * FROM comments WHERE image_id = $1 ORDER BY id DESC;`,
