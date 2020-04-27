@@ -141,8 +141,27 @@
                 // console.log("file: ", e.target.files[0]);
                 this.file = e.target.files[0];
             },
-            showMore: function () {
+            showMore: function (e) {
                 console.log("showMore running");
+                e.preventDefault();
+                console.log("this.images.length", this.images.length);
+                console.log("this.images", this.images);
+                var visibleId = this.images.length - 1;
+                console.log("***", this.images[visibleId]);
+                var bottomItem = this.images[visibleId];
+                var bottomItemId = bottomItem.id;
+                console.log("**bottomItemId**", bottomItemId);
+                var self = this;
+                axios
+                    .post("/more", bottomItemId)
+                    .then(function (result) {
+                        console.log("**result of AXIOS", result);
+
+                        self.images.push(result);
+                    })
+                    .catch(function (err) {
+                        console.log("error in POST /more: ", err);
+                    });
             },
         },
         // END OF METHODS

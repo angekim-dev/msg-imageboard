@@ -42,7 +42,7 @@ app.get("/images", (req, res) => {
         });
 });
 
-app.post("more", (req, res) => {
+app.post("/more", (req, res) => {
     return db
         .getMoreImages(req.body.id)
         .then((result) => {
@@ -97,7 +97,7 @@ app.post("/one-image", (req, res) => {
         })
         .then(() => {
             return db.getComment(req.body.id).then((results) => {
-                console.log("****results.rows in getComment", results.rows);
+                // console.log("****results.rows in getComment", results.rows);
                 initialJson.push(results.rows);
                 // results.rows is an empty array
                 res.json(initialJson);
