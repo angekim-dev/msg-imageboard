@@ -39,8 +39,8 @@ CREATE TABLE comments(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO comments (username, comment, image_id) VALUES (
-    'userOne',
-    'This is my opinion',
-    1
-);
+-- INSERT INTO comments (username, comment, image_id) VALUES (
+--     'userOne',
+--     'This is my opinion',
+--     1
+-- );

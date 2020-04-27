@@ -31,15 +31,19 @@
         <!-- Looping in Vue -->
         <h2>Latest Images</h2>
         <div class="box">
+            <!-- 1. removed @click="selectedImages = image.id"-->
+            <!-- 2. wrap image in anchor tag with a specific href value -->
             <div 
-                @click="selectedImages = image.id"
                 v-for="image in images" 
                 class="image"
                 v-if="images.length">
+                <a :href="'#' + image.id">
                 <img :src="image.url">
                 <label>{{image.title }}</label>
+                </a>
             </div>
         </div>
+        <button @click="showMore">MORE</button>
 
         <!-- <first-component></first-component> -->
     </div>

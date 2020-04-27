@@ -38,7 +38,7 @@ app.get("/images", (req, res) => {
     // because SPA single page application
     console.log("images route has been hit");
     return db
-        .selectImage()
+        .getMoreImages()
         .then((result) => {
             // console.log("***result of insertImage", result);
             res.json(result.rows);
