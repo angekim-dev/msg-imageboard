@@ -93,7 +93,7 @@ app.post("/one-image", (req, res) => {
                 "**** result.rows of getImage in index.js",
                 result.rows
             );
-            initialJson.push(result.rows[0]);
+            initialJson.unshift(result.rows[0]);
         })
         .then(() => {
             return db.getComment(req.body.id).then((results) => {

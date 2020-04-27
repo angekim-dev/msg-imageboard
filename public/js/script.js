@@ -77,30 +77,16 @@
         // el - represents which element in our html will have access tp our Vue code
         el: "#main",
         data: {
-            selectedImages: null, // anything truthy, also can be a number e.g. 10 or
-            images: [],
             // // this line of code makes modal pop  open automatically when page intially loads
             // // this gives us a link sharing functionality
-            // id: location.hash.slice(1),
+            // selectedImage: location.hash.slice(1),
+            selectedImage: null, // anything truthy, also can be a number e.g. 10 or
+            images: [],
             title: "",
             description: "",
             username: "",
             file: null,
             moreImg: true,
-            // fruits: [
-            //     {
-            //         title: "🥝",
-            //         id: 1,
-            //     },
-            //     {
-            //         title: "🍓",
-            //         id: 2,
-            //     },
-            //     {
-            //         title: "🍋",
-            //         id: 3,
-            //     },
-            // ],
         }, // data ends
         mounted: function () {
             // console.log("my vue has MOUNTED!");
@@ -120,13 +106,13 @@
             //     console.log("hash change has fired");
             //     console.log(location.hash);
 
-            //     self.id = location.hash.slice(1);
+            //     self.selectedImage = location.hash.slice(1);
             // });
         }, // mounted ends
         methods: {
             closeMe: function () {
                 console.log("I am the parent, I will now close the modal...");
-                this.selectedImages = null;
+                this.selectedImage = null;
             },
             handleClick: function (e) {
                 e.preventDefault();

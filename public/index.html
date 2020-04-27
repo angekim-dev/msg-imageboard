@@ -18,9 +18,9 @@
             <!-- just convention to call it handleClick -->
         </form>
         <first-component 
-            v-if="selectedImages" 
+            v-if="selectedImage" 
             post-title="hello" 
-            :id="selectedImages"
+            :id="selectedImage"
             @closemuffin="closeMe">
         </first-component>
         <!-- <first-component></first-component> -->
@@ -28,14 +28,14 @@
         <!-- Looping in Vue -->
         <h2>Latest Images</h2>
         <div class="box">
-             <!-- 1. removed @click="selectedImages = image.id"-->
+             <!-- 1. removed @click="selectedImage = image.id"-->
             <!-- 2. wrap image in anchor tag with a specific href value -->
             <div 
-                @click="selectedImages = item.id"
+                @click="selectedImage = item.id"
                 v-for="item in images" 
                 class="image"
                 v-if="images.length">
-                <!-- <a :href="'#' + image.id"> -->
+                <!-- <a :href="'#' + item.id"> -->
                 <img :src="item.url">
                 <label>{{item.title }}</label>
                 <!-- </a> -->
