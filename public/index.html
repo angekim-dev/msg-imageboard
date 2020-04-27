@@ -31,14 +31,13 @@
              <!-- 1. removed @click="selectedImage = image.id"-->
             <!-- 2. wrap image in anchor tag with a specific href value -->
             <div 
-                @click="selectedImage = item.id"
                 v-for="item in images" 
                 class="image"
                 v-if="images.length">
-                <!-- <a :href="'#' + item.id"> -->
+                <a :href="'#' + item.id">
                 <img :src="item.url">
                 <label>{{item.title }}</label>
-                <!-- </a> -->
+                </a>
             </div>
         </div>
         <button id="more" v-if="moreImg" @click="showMore">MORE</button>

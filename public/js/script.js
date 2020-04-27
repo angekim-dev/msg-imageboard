@@ -38,15 +38,15 @@
                 created_at: "",
             };
         },
-        // watch: {
-        //     id: function () {
-        //         //whenever our image id changes, this function will run
-        //         // same thing a mounted function on component
-        //         // axious, so it runs not only once but every single time
-        //         // so retrieve NEW image info and comments as well
-        //         console.log("WATCHER image ID changed");
-        //     },
-        // },
+        watch: {
+            id: function () {
+                //whenever our image id changes, this function will run
+                // same thing as mounted function on component
+                // axious, so it runs not only once but every single time
+                // so retrieve NEW image info and comments as well
+                console.log("WATCHER image ID changed");
+            },
+        },
         methods: {
             closeModal: function () {
                 console.log("I am emitting from the component...(child)");
@@ -77,10 +77,10 @@
         // el - represents which element in our html will have access tp our Vue code
         el: "#main",
         data: {
-            // // this line of code makes modal pop  open automatically when page intially loads
-            // // this gives us a link sharing functionality
-            // selectedImage: location.hash.slice(1),
-            selectedImage: null, // anything truthy, also can be a number e.g. 10 or
+            // this line of code makes modal pop  open automatically when page intially loads
+            // this gives us a link sharing functionality
+            selectedImage: location.hash.slice(1),
+            // selectedImage: null, // anything truthy, also can be a number e.g. 10 or
             images: [],
             title: "",
             description: "",
@@ -102,12 +102,12 @@
                 .catch(function (err) {
                     console.log("error in GET /images: ", err);
                 });
-            // window.addEventListener("hashchange", function () {
-            //     console.log("hash change has fired");
-            //     console.log(location.hash);
+            window.addEventListener("hashchange", function () {
+                console.log("hash change has fired");
+                console.log(location.hash);
 
-            //     self.selectedImage = location.hash.slice(1);
-            // });
+                self.selectedImage = location.hash.slice(1);
+            });
         }, // mounted ends
         methods: {
             closeMe: function () {
