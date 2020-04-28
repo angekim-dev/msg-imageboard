@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>I [] pixels</h1>
+    <h1>I <3 pastels</h1>
     <!-- container for Vue instance, has access to our Vue code -->
     <div id="main">
         <form>
@@ -13,7 +13,7 @@
             <input v-model="description" type="text" name="description" placeholder="description">
             <input v-model="username" type="text" name="username" placeholder="username">
            
-            <input @change="handleChange" type="file" name="file" accept="image/*">
+            <input class="upload" @change="handleChange" type="file" name="file" accept="image/*">
             <button @click="handleClick">submit</button>
             <!-- just convention to call it handleClick -->
         </form>
@@ -48,18 +48,20 @@
     
     <script type="text/x-template" id="template">
             <div class="component">
-                <h4 @click="closeModal">X</h4>
-                <p><a :href="'#' + item.prev_id"><</a></p>
-                <p><a :href="'#' + item.next_id">></a></p>
+                <br>
+                <h4 id="close" @click="closeModal">X</h4>
+                <p><a :href="'#' + item.first_id">< see how it all started!</a></p>
+                <!-- <p><a :href="'#' + item.next_id">></a></p> -->
                 <img :src="item.url" />
                 <p>{{item.title}}</p>
                 <p>{{item.description}}</p>
                 <p>Uploaded by {{item.username}} on {{item.created_at}}</p>
                 <h5>Add a Comment!</h5>
-                <input v-model="comment" type="text" name="comment" placeholder="Your comment">
+                <input v-model="comment" type="text" name="comment" placeholder="Your comment"><br>
                 <input v-model="username" type="text" name="username" placeholder="Your username">
-
+                <br>
                 <button @click="displayComment">COMMENT</button>
+                <br>
                 <div
                 class="comments"
                 v-for="comment in comments"
