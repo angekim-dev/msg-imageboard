@@ -31,6 +31,8 @@
                     description: "",
                     username: "",
                     comment: "",
+                    next_id: "",
+                    prev_id: "",
                 },
                 comments: [],
                 username: "",

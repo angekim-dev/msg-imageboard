@@ -36,7 +36,11 @@ exports.getMoreImages = (id) => {
 
 module.exports.getImage = (id) => {
     return db.query(
-        `SELECT * FROM images
+        `SELECT *, (
+            SELECT id FROM images LIMIT 1
+        ) AS next_id, (
+            SELECT id FROM images LIMIT 1
+        ) AS prev_id FROM images
         WHERE id = $1
         ORDER BY id DESC;`,
         [id]

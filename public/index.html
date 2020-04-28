@@ -49,6 +49,8 @@
     <script type="text/x-template" id="template">
             <div class="component">
                 <h4 @click="closeModal">X</h4>
+                <p><a :href="'#' + item.prev_id"><</a></p>
+                <p><a :href="'#' + item.next_id">></a></p>
                 <img :src="item.url" />
                 <p>{{item.title}}</p>
                 <p>{{item.description}}</p>
