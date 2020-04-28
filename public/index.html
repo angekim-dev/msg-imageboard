@@ -45,24 +45,26 @@
     </div>
 <!-- END OF MAIN -->
     <!-- we can only return one element from our tag, so ONLY ONE DIV!!!  -->
+    
     <script type="text/x-template" id="template">
-        <div class="component">
-            <h4 @click="closeModal">X</h4>
-            <img :src="item.url" />
-            <p>{{item.title}}</p>
-            <p>{{item.description}}</p>
-              <p>Uploaded by {{item.username}} on {{item.created_at}}</p>
-            <h5>Add a Comment!</h5>
-            <input v-model="comment" type="text" name="comment" placeholder="Your comment">
-            <input v-model="username" type="text" name="username" placeholder="Your username">
+            <div class="component">
+                <h4 @click="closeModal">X</h4>
+                <img :src="item.url" />
+                <p>{{item.title}}</p>
+                <p>{{item.description}}</p>
+                <p>Uploaded by {{item.username}} on {{item.created_at}}</p>
+                <h5>Add a Comment!</h5>
+                <input v-model="comment" type="text" name="comment" placeholder="Your comment">
+                <input v-model="username" type="text" name="username" placeholder="Your username">
 
-            <button @click="displayComment">COMMENT</button>
-            <div
-            class="comments"
-            v-for="comment in comments"
-            v-if="comments.length">{{comment.comment}} <br>{{comment.username}} on {{comment.created_at}}</div>
+                <button @click="displayComment">COMMENT</button>
+                <div
+                class="comments"
+                v-for="comment in comments"
+                v-if="comments.length">{{comment.comment}} <br>{{comment.username}} on {{comment.created_at}}</div>
             </div>
     </script>
+    
 
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>

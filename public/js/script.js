@@ -45,6 +45,37 @@
                 // axious, so it runs not only once but every single time
                 // so retrieve NEW image info and comments as well
                 console.log("WATCHER image ID changed");
+                var self = this;
+                console.log("in watcher!!! id", self.id);
+                axios
+                    .post("/one-image", {
+                        id: this.id,
+                    })
+                    .then(function (response) {
+                        console.log(
+                            "response from WATCH /image",
+                            response.data
+                        );
+                        console.log(
+                            "this INSIDE axios in WATCH component",
+                            self
+                        );
+                        self.item = response.data.shift();
+                        console.log("in watcher!!! item", self.item);
+                        document.querySelector(".component").style.visibility =
+                            "visible";
+                        self.comments = response.data[0];
+                        console.log("comments in watcher", self.comments);
+                        if (self.item == null) {
+                            document.querySelector(
+                                ".component"
+                            ).style.visibility = "hidden";
+                            console.log("NULL");
+                        }
+                    })
+                    .catch(function (err) {
+                        console.log("error in WATCH /one-image: ", err);
+                    });
             },
         },
         methods: {
@@ -104,15 +135,19 @@
                 });
             window.addEventListener("hashchange", function () {
                 console.log("hash change has fired");
-                console.log(location.hash);
-
+                console.log("***location.hash***", location.hash);
                 self.selectedImage = location.hash.slice(1);
+                console.log(
+                    "self.selectedImage in Vue mounted window",
+                    self.selectedImage
+                );
             });
         }, // mounted ends
         methods: {
             closeMe: function () {
                 console.log("I am the parent, I will now close the modal...");
                 this.selectedImage = null;
+                location.hash = "";
             },
             handleClick: function (e) {
                 e.preventDefault();
