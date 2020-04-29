@@ -199,7 +199,15 @@
                                 "more"
                             ).style.visibility = "hidden";
                         }
-                        self.images.push(...result.data);
+                        // "console.log(
+                        //     "***result.data",
+                        //     result.data[0],
+                        //     result.data[1],
+                        //     result.data[2]
+                        // );"
+                        var resultArr = result.data;
+
+                        self.images.push(...resultArr);
                     })
                     .catch(function (err) {
                         console.log("error in POST /more: ", err);
